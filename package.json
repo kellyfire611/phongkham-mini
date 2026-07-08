@@ -1,0 +1,27 @@
+{
+  "name": "phong-kham-mini",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Ung dung tiep nhan benh nhan va ke don thuoc dung LocalStorage, Vitest, Playwright va GitHub Pages.",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview --host 127.0.0.1 --port 4173",
+    "preview:test": "vite preview --host 127.0.0.1 --port 4173",
+    "test": "vitest run",
+    "test:unit": "vitest run tests/unit",
+    "test:business": "vitest run tests/business",
+    "test:coverage": "vitest run tests/unit tests/business --coverage",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:report": "playwright show-report",
+    "test:all": "npm run test:unit && npm run test:business && npm run test:e2e"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.61.1",
+    "@vitest/coverage-v8": "4.1.9",
+    "vite": "8.1.3",
+    "vitest": "4.1.9"
+  }
+}

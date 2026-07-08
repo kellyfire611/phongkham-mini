@@ -1,0 +1,11 @@
+@page { size: A4; margin: 16mm; }
+body { background: white !important; color: black !important; }
+body * { visibility: hidden !important; }
+#noi-dung-in-don, #noi-dung-in-don * { visibility: visible !important; }
+#noi-dung-in-don { position: absolute; inset: 0; width: 100%; padding: 0 !important; }
+.no-print { display: none !important; }
+.print-header { border-bottom: 2px solid black; }
+.print-table { width: 100%; border-collapse: collapse; }
+.print-table th, .print-table td { border: 1px solid #555; padding: 7px; }
+.print-table tr { break-inside: avoid; }
+.signature { break-inside: avoid; }
