@@ -23,20 +23,20 @@ export function khoiTaoDonThuocUI({ donThuocService, benhNhanService, khoLuuTru,
       const tr = document.createElement('tr');
       tr.dataset.prescriptionId = don.id;
       tr.append(
-        taoO(don.maDonThuoc, 'Ma don'),
-        taoO(don.tenBenhNhan, 'Benh nhan'),
-        taoO(don.tenBacSi || '-', 'Bac si'),
-        taoO(dinhDangNgayGio(don.ngayKeDon), 'Ngay ke'),
-        taoO(don.danhSachThuoc.length, 'So thuoc'),
+        taoO(don.maDonThuoc, 'Mã đơn'),
+        taoO(don.tenBenhNhan, 'Bệnh nhân'),
+        taoO(don.tenBacSi || '-', 'Bác sĩ'),
+        taoO(dinhDangNgayGio(don.ngayKeDon), 'Ngày kê'),
+        taoO(don.danhSachThuoc.length, 'Số thuốc'),
       );
       const tdTrangThai = document.createElement('td');
-      tdTrangThai.dataset.label = 'Trang thai';
+      tdTrangThai.dataset.label = 'Trạng thái';
       const badge = document.createElement('span');
       badge.className = `badge badge-${don.trangThai}`;
       badge.textContent = NHAN_TRANG_THAI[don.trangThai];
       tdTrangThai.append(badge);
       const tdAction = document.createElement('td');
-      tdAction.dataset.label = 'Thao tac';
+      tdAction.dataset.label = 'Thao tác';
       const nhom = document.createElement('div');
       nhom.className = 'action-group';
       const nutXem = document.createElement('button');
@@ -47,14 +47,14 @@ export function khoiTaoDonThuocUI({ donThuocService, benhNhanService, khoLuuTru,
       nhom.append(nutIn);
       if (don.trangThai === 'nhap') {
         const nutHuy = document.createElement('button');
-        nutHuy.type = 'button'; nutHuy.className = 'button button-small button-danger-outline'; nutHuy.textContent = 'Huy'; nutHuy.dataset.action = 'huy'; nutHuy.dataset.id = don.id;
+        nutHuy.type = 'button'; nutHuy.className = 'button button-small button-danger-outline'; nutHuy.textContent = 'Hủy'; nutHuy.dataset.action = 'huy'; nutHuy.dataset.id = don.id;
         nhom.append(nutHuy);
       }
       tdAction.append(nhom);
       tr.append(tdTrangThai, tdAction);
       tbody.append(tr);
     });
-    document.querySelector('#tong-don-thuoc').textContent = `${danhSach.length} don thuoc`;
+    document.querySelector('#tong-don-thuoc').textContent = `${danhSach.length} đơn thuốc`;
     document.querySelector('#rong-don-thuoc').classList.toggle('is-hidden', danhSach.length > 0);
   }
 
@@ -76,7 +76,7 @@ export function khoiTaoDonThuocUI({ donThuocService, benhNhanService, khoLuuTru,
       [
         index + 1,
         `${thuoc.tenThuoc}${thuoc.hamLuong ? ` - ${thuoc.hamLuong}` : ''}`,
-        `${thuoc.soLuongMoiLan} x ${thuoc.soLanMoiNgay} lan/ngay x ${thuoc.soNgayDung} ngay`,
+        `${thuoc.soLuongMoiLan} x ${thuoc.soLanMoiNgay} lần/ngày x ${thuoc.soNgayDung} ngày`,
         `${thuoc.tongSoLuong} ${thuoc.donVi || ''}`.trim(),
         [thuoc.cachDung, thuoc.thoiDiemDung].filter(Boolean).join(' - ') || '-',
       ].forEach((noiDung) => { const td = document.createElement('td'); td.textContent = noiDung; tr.append(td); });
@@ -102,10 +102,10 @@ export function khoiTaoDonThuocUI({ donThuocService, benhNhanService, khoLuuTru,
     try {
       if (nut.dataset.action === 'xem') hienThiChiTietDonThuoc(nut.dataset.id);
       if (nut.dataset.action === 'in') xuLyInDonThuoc(nut.dataset.id);
-      if (nut.dataset.action === 'huy' && xacNhanThaoTac('Ban co chac muon huy don nhap nay?')) {
+      if (nut.dataset.action === 'huy' && xacNhanThaoTac('Bạn có chắc muốn hủy đơn nháp này?')) {
         donThuocService.huyDonThuoc(nut.dataset.id);
         if (khoLuuTru.docGiaTri(KHOA_LUU_TRU.DON_DANG_MO, '') === nut.dataset.id) khoLuuTru.xoaTheoKhoa(KHOA_LUU_TRU.DON_DANG_MO);
-        hienThiThongBaoThanhCong('Da huy don thuoc nhap.');
+        hienThiThongBaoThanhCong('Đã hủy đơn thuốc nháp.');
         hienThiDanhSachDonThuoc();
         onThayDoi();
       }

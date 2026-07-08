@@ -18,10 +18,10 @@ export const TRANG_THAI_DON_THUOC = Object.freeze({
 });
 
 export const NHAN_TRANG_THAI = Object.freeze({
-  cho_kham: 'Cho kham',
-  dang_kham: 'Dang kham',
-  da_kham: 'Da kham',
-  nhap: 'Nhap',
-  da_hoan_tat: 'Da hoan tat',
-  da_huy: 'Da huy',
+  cho_kham: 'Chờ khám',
+  dang_kham: 'Đang khám',
+  da_kham: 'Đã khám',
+  nhap: 'Nháp',
+  da_hoan_tat: 'Đã hoàn tất',
+  da_huy: 'Đã hủy',
 });

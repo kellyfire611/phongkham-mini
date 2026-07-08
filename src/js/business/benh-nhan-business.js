@@ -1,5 +1,5 @@
 import { TRANG_THAI_BENH_NHAN, TRANG_THAI_DON_THUOC } from '../constants/hang-so.js';
-import { chuanHoaChuoi } from '../utils/kiem-tra.js';
+import { chuanHoaChuoi, chuanHoaTuKhoaTimKiem } from '../utils/kiem-tra.js';
 
 export function chuanHoaBenhNhan(duLieu = {}) {
   return {
@@ -32,10 +32,10 @@ export function timBenhNhanTrung(danhSach, duLieu, idLoaiTru = null) {
 }
 
 export function locBenhNhanTheoTuKhoa(danhSach, tuKhoa = '') {
-  const khoa = chuanHoaChuoi(tuKhoa).toLocaleLowerCase('vi');
+  const khoa = chuanHoaTuKhoaTimKiem(tuKhoa);
   if (!khoa) return [...danhSach];
   return danhSach.filter((item) => [item.maBenhNhan, item.hoTen, item.soDienThoai]
-    .some((giaTri) => String(giaTri ?? '').toLocaleLowerCase('vi').includes(khoa)));
+    .some((giaTri) => chuanHoaTuKhoaTimKiem(giaTri).includes(khoa)));
 }
 
 export function locBenhNhanTheoTrangThai(danhSach, trangThai = '') {

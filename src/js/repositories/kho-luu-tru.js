@@ -1,7 +1,7 @@
 import { KHOA_LUU_TRU } from '../constants/hang-so.js';
 
 export function taoKhoLuuTru(storage = globalThis.localStorage) {
-  if (!storage) throw new Error('Khong tim thay storage de luu du lieu.');
+  if (!storage) throw new Error('Không tìm thấy storage để lưu dữ liệu.');
 
   function docGiaTri(khoa, giaTriMacDinh = null) {
     const duLieu = storage.getItem(khoa);
@@ -9,7 +9,7 @@ export function taoKhoLuuTru(storage = globalThis.localStorage) {
     try {
       return JSON.parse(duLieu);
     } catch (error) {
-      console.warn(`Du lieu tai khoa ${khoa} bi loi JSON.`, error);
+      console.warn(`Dữ liệu tại khóa ${khoa} bị lỗi JSON.`, error);
       return giaTriMacDinh;
     }
   }
@@ -25,7 +25,7 @@ export function taoKhoLuuTru(storage = globalThis.localStorage) {
   }
 
   function ghiDanhSach(khoa, danhSach) {
-    if (!Array.isArray(danhSach)) throw new Error('Du lieu can ghi phai la danh sach.');
+    if (!Array.isArray(danhSach)) throw new Error('Dữ liệu cần ghi phải là danh sách.');
     return ghiGiaTri(khoa, danhSach);
   }
 

@@ -7,7 +7,7 @@ function dinhDangPhanNgauNhien(giaTri) {
 
 function dinhDangNgayMa(thoiGian) {
   const ngay = new Date(thoiGian);
-  if (Number.isNaN(ngay.getTime())) throw new Error('Thoi gian tao ma khong hop le.');
+  if (Number.isNaN(ngay.getTime())) throw new Error('Thời gian tạo mã không hợp lệ.');
   const nam = ngay.getFullYear();
   const thang = String(ngay.getMonth() + 1).padStart(2, '0');
   const ngayTrongThang = String(ngay.getDate()).padStart(2, '0');

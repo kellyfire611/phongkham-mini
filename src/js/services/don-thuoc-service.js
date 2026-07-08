@@ -16,19 +16,19 @@ import {
 export function taoDonThuocService({ donThuocRepository, benhNhanRepository, taoId, taoMaDonThuoc, layThoiGianHienTai }) {
   function layBenhNhanBatBuoc(id) {
     const benhNhan = benhNhanRepository.timBenhNhanTheoId(id);
-    if (!benhNhan) throw new Error('Khong tim thay benh nhan.');
+    if (!benhNhan) throw new Error('Không tìm thấy bệnh nhân.');
     return benhNhan;
   }
 
   function layDonBatBuoc(id) {
     const don = donThuocRepository.timDonThuocTheoId(id);
-    if (!don) throw new Error('Khong tim thay don thuoc.');
+    if (!don) throw new Error('Không tìm thấy đơn thuốc.');
     return don;
   }
 
   function taoDonThuocNhap(benhNhanId, thongTinKham = {}) {
     const benhNhan = layBenhNhanBatBuoc(benhNhanId);
-    if (!coTheLapDonThuoc(benhNhan)) throw new Error('Benh nhan khong o trang thai co the lap don.');
+    if (!coTheLapDonThuoc(benhNhan)) throw new Error('Bệnh nhân không ở trạng thái có thể lập đơn.');
     const donNhapCu = donThuocRepository.timDonThuocTheoBenhNhan(benhNhanId)
       .find((don) => don.trangThai === TRANG_THAI_DON_THUOC.NHAP);
     if (donNhapCu) return donNhapCu;
@@ -46,12 +46,12 @@ export function taoDonThuocService({ donThuocRepository, benhNhanRepository, tao
   function layDanhSachDonThuoc() {
     return sapXepDonThuocMoiNhat(donThuocRepository.layTatCaDonThuoc().map((don) => {
       const benhNhan = benhNhanRepository.timBenhNhanTheoId(don.benhNhanId);
-      return { ...don, tenBenhNhan: benhNhan?.hoTen ?? 'Benh nhan da xoa', ngaySinhBenhNhan: benhNhan?.ngaySinh ?? '' };
+      return { ...don, tenBenhNhan: benhNhan?.hoTen ?? 'Bệnh nhân đã xóa', ngaySinhBenhNhan: benhNhan?.ngaySinh ?? '' };
     }));
   }
 
   function damBaoCoTheSua(don) {
-    if (!coTheSuaDonThuoc(don)) throw new Error('Khong the sua don thuoc da hoan tat hoac da huy.');
+    if (!coTheSuaDonThuoc(don)) throw new Error('Không thể sửa đơn thuốc đã hoàn tất hoặc đã hủy.');
   }
 
   function themThuocVaoDon(donThuocId, duLieuThuoc) {
@@ -102,7 +102,7 @@ export function taoDonThuocService({ donThuocRepository, benhNhanRepository, tao
 
   function huyDonThuoc(donThuocId) {
     const don = layDonBatBuoc(donThuocId);
-    if (!coTheHuyDonThuoc(don)) throw new Error('Khong the huy don thuoc da hoan tat.');
+    if (!coTheHuyDonThuoc(don)) throw new Error('Không thể hủy đơn thuốc đã hoàn tất.');
     const thoiGian = layThoiGianHienTai();
     const ketQua = donThuocRepository.capNhatDonThuoc(donThuocId, { trangThai: TRANG_THAI_DON_THUOC.DA_HUY, ngayCapNhat: thoiGian });
     const benhNhan = benhNhanRepository.timBenhNhanTheoId(don.benhNhanId);

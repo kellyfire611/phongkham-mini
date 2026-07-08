@@ -3,28 +3,28 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Ung dung hoc tap tiep nhan benh nhan va ke don thuoc" />
-    <title>Phong kham Mini</title>
+    <meta name="description" content="Ứng dụng học tập tiếp nhận bệnh nhân và kê đơn thuốc" />
+    <title>Phòng khám Mini</title>
     <link rel="stylesheet" href="./src/css/style.css" />
     <link rel="stylesheet" href="./src/css/print.css" media="print" />
   </head>
   <body>
     <header class="app-header">
       <div>
-        <p class="eyebrow">UNG DUNG HOC TAP</p>
-        <h1>Phong kham Mini</h1>
-        <p>Tiep nhan benh nhan va ke don thuoc bang LocalStorage</p>
+        <p class="eyebrow">ỨNG DỤNG HỌC TẬP</p>
+        <h1>Phòng khám Mini</h1>
+        <p>Tiếp nhận bệnh nhân và kê đơn thuốc bằng LocalStorage</p>
       </div>
       <div class="header-actions">
-        <button id="button-du-lieu-mau" class="button button-secondary" type="button">Tao du lieu mau</button>
-        <button id="button-xoa-du-lieu" class="button button-danger-outline" type="button">Xoa toan bo du lieu</button>
+        <button id="button-du-lieu-mau" class="button button-secondary" type="button">Tạo dữ liệu mẫu</button>
+        <button id="button-xoa-du-lieu" class="button button-danger-outline" type="button">Xóa toàn bộ dữ liệu</button>
       </div>
     </header>
 
-    <nav class="tabs" aria-label="Chuc nang chinh">
-      <button class="tab is-active" type="button" data-section="tiep-nhan">Tiep nhan benh nhan</button>
-      <button class="tab" type="button" data-section="kham-benh">Kham va ke don</button>
-      <button class="tab" type="button" data-section="lich-su">Lich su don thuoc</button>
+    <nav class="tabs" aria-label="Chức năng chính">
+      <button class="tab is-active" type="button" data-section="tiep-nhan">Tiếp nhận bệnh nhân</button>
+      <button class="tab" type="button" data-section="kham-benh">Khám và kê đơn</button>
+      <button class="tab" type="button" data-section="lich-su">Lịch sử đơn thuốc</button>
     </nav>
 
     <main class="app-container">
@@ -33,59 +33,59 @@
       <section id="section-tiep-nhan" class="app-section" data-section-panel="tiep-nhan">
         <div class="section-heading">
           <div>
-            <p class="eyebrow">BUOC 1</p>
-            <h2>Tiep nhan benh nhan</h2>
+            <p class="eyebrow">BƯỚC 1</p>
+            <h2>Tiếp nhận bệnh nhân</h2>
           </div>
-          <p>Them, cap nhat, tim kiem va chuyen benh nhan vao phong kham.</p>
+          <p>Thêm, cập nhật, tìm kiếm và chuyển bệnh nhân vào phòng khám.</p>
         </div>
 
         <div class="two-column-layout">
           <article class="card">
-            <h3>Thong tin benh nhan</h3>
+            <h3>Thông tin bệnh nhân</h3>
             <form id="form-benh-nhan" data-testid="form-benh-nhan" novalidate>
               <input id="benh-nhan-id" type="hidden" />
               <div id="loi-form-benh-nhan" class="form-errors is-hidden" role="alert"></div>
               <div class="form-grid">
                 <label class="field field-span-2">
-                  <span>Ho ten <strong>*</strong></span>
+                  <span>Họ tên <strong>*</strong></span>
                   <input id="ho-ten" data-testid="input-ho-ten" name="hoTen" type="text" autocomplete="name" required />
                 </label>
                 <label class="field">
-                  <span>Ngay sinh <strong>*</strong></span>
+                  <span>Ngày sinh <strong>*</strong></span>
                   <input id="ngay-sinh" data-testid="input-ngay-sinh" name="ngaySinh" type="date" required />
                 </label>
                 <label class="field">
-                  <span>Gioi tinh</span>
+                  <span>Giới tính</span>
                   <select id="gioi-tinh" name="gioiTinh">
                     <option value="Nam">Nam</option>
-                    <option value="Nu">Nu</option>
-                    <option value="Khac">Khac</option>
+                    <option value="Nữ">Nữ</option>
+                    <option value="Khác">Khác</option>
                   </select>
                 </label>
                 <label class="field field-span-2">
-                  <span>So dien thoai <strong>*</strong></span>
-                  <input id="so-dien-thoai" data-testid="input-so-dien-thoai" name="soDienThoai" type="tel" autocomplete="tel" placeholder="Vi du: 0901234567" required />
+                  <span>Số điện thoại <strong>*</strong></span>
+                  <input id="so-dien-thoai" data-testid="input-so-dien-thoai" name="soDienThoai" type="tel" autocomplete="tel" placeholder="Ví dụ: 0901234567" required />
                 </label>
                 <label class="field field-span-2">
-                  <span>Dia chi</span>
+                  <span>Địa chỉ</span>
                   <input id="dia-chi" name="diaChi" type="text" autocomplete="street-address" />
                 </label>
                 <label class="field field-span-2">
-                  <span>Trieu chung <strong>*</strong></span>
+                  <span>Triệu chứng <strong>*</strong></span>
                   <textarea id="trieu-chung" name="trieuChung" rows="3" required></textarea>
                 </label>
                 <label class="field field-span-2">
-                  <span>Tien su benh</span>
+                  <span>Tiền sử bệnh</span>
                   <textarea id="tien-su-benh" name="tienSuBenh" rows="2"></textarea>
                 </label>
                 <label class="field field-span-2">
-                  <span>Di ung thuoc</span>
+                  <span>Dị ứng thuốc</span>
                   <textarea id="di-ung-thuoc" name="diUngThuoc" rows="2"></textarea>
                 </label>
               </div>
               <div class="form-actions">
-                <button id="button-luu-benh-nhan" data-testid="button-luu-benh-nhan" class="button button-primary" type="submit">Luu benh nhan</button>
-                <button id="button-lam-moi-benh-nhan" class="button button-secondary" type="button">Lam moi</button>
+                <button id="button-luu-benh-nhan" data-testid="button-luu-benh-nhan" class="button button-primary" type="submit">Lưu bệnh nhân</button>
+                <button id="button-lam-moi-benh-nhan" class="button button-secondary" type="button">Làm mới</button>
               </div>
             </form>
           </article>
@@ -93,21 +93,21 @@
           <article class="card card-wide">
             <div class="card-toolbar">
               <div>
-                <h3>Danh sach benh nhan</h3>
-                <p id="tong-benh-nhan" class="muted">0 benh nhan</p>
+                <h3>Danh sách bệnh nhân</h3>
+                <p id="tong-benh-nhan" class="muted">0 bệnh nhân</p>
               </div>
               <div class="filters">
                 <label class="field compact">
-                  <span>Tim kiem</span>
-                  <input id="tim-benh-nhan" data-testid="input-tim-benh-nhan" type="search" placeholder="Ma, ho ten, so dien thoai" />
+                  <span>Tìm kiếm</span>
+                  <input id="tim-benh-nhan" data-testid="input-tim-benh-nhan" type="search" placeholder="Mã, họ tên, số điện thoại" />
                 </label>
                 <label class="field compact">
-                  <span>Trang thai</span>
+                  <span>Trạng thái</span>
                   <select id="loc-trang-thai-benh-nhan">
-                    <option value="">Tat ca</option>
-                    <option value="cho_kham">Cho kham</option>
-                    <option value="dang_kham">Dang kham</option>
-                    <option value="da_kham">Da kham</option>
+                    <option value="">Tất cả</option>
+                    <option value="cho_kham">Chờ khám</option>
+                    <option value="dang_kham">Đang khám</option>
+                    <option value="da_kham">Đã khám</option>
                   </select>
                 </label>
               </div>
@@ -116,18 +116,18 @@
               <table>
                 <thead>
                   <tr>
-                    <th>Ma BN</th>
-                    <th>Ho ten</th>
-                    <th>Ngay sinh</th>
-                    <th>So dien thoai</th>
-                    <th>Trang thai</th>
-                    <th>Thao tac</th>
+                    <th>Mã BN</th>
+                    <th>Họ tên</th>
+                    <th>Ngày sinh</th>
+                    <th>Số điện thoại</th>
+                    <th>Trạng thái</th>
+                    <th>Thao tác</th>
                   </tr>
                 </thead>
                 <tbody id="danh-sach-benh-nhan" data-testid="danh-sach-benh-nhan"></tbody>
               </table>
             </div>
-            <div id="rong-benh-nhan" class="empty-state">Chua co benh nhan nao.</div>
+            <div id="rong-benh-nhan" class="empty-state">Chưa có bệnh nhân nào.</div>
           </article>
         </div>
       </section>
@@ -135,96 +135,96 @@
       <section id="section-kham-benh" data-testid="khu-vuc-kham-benh" class="app-section is-hidden" data-section-panel="kham-benh">
         <div class="section-heading">
           <div>
-            <p class="eyebrow">BUOC 2</p>
-            <h2>Kham benh va ke don</h2>
+            <p class="eyebrow">BƯỚC 2</p>
+            <h2>Khám bệnh và kê đơn</h2>
           </div>
-          <p>Thong tin thuoc va lieu dung do nguoi dung tu nhap. Ung dung khong tu dong de xuat dieu tri.</p>
+          <p>Thông tin thuốc và liều dùng do người dùng tự nhập. Ứng dụng không tự động đề xuất điều trị.</p>
         </div>
 
         <div id="chua-chon-benh-nhan" class="empty-state prominent">
-          Hay chon mot benh nhan dang cho kham tu danh sach tiep nhan.
+          Hãy chọn một bệnh nhân đang chờ khám từ danh sách tiếp nhận.
         </div>
 
         <div id="noi-dung-kham-benh" class="is-hidden">
           <article class="card patient-summary">
             <div>
-              <p class="eyebrow">BENH NHAN DANG KHAM</p>
+              <p class="eyebrow">BỆNH NHÂN ĐANG KHÁM</p>
               <h3 id="kham-ho-ten">-</h3>
               <p id="kham-ma-benh-nhan" class="muted">-</p>
             </div>
             <dl class="summary-grid">
-              <div><dt>Ngay sinh</dt><dd id="kham-ngay-sinh">-</dd></div>
-              <div><dt>So dien thoai</dt><dd id="kham-so-dien-thoai">-</dd></div>
-              <div><dt>Trieu chung</dt><dd id="kham-trieu-chung">-</dd></div>
-              <div><dt>Tien su benh</dt><dd id="kham-tien-su-benh">-</dd></div>
-              <div><dt>Di ung thuoc</dt><dd id="kham-di-ung-thuoc">-</dd></div>
+              <div><dt>Ngày sinh</dt><dd id="kham-ngay-sinh">-</dd></div>
+              <div><dt>Số điện thoại</dt><dd id="kham-so-dien-thoai">-</dd></div>
+              <div><dt>Triệu chứng</dt><dd id="kham-trieu-chung">-</dd></div>
+              <div><dt>Tiền sử bệnh</dt><dd id="kham-tien-su-benh">-</dd></div>
+              <div><dt>Dị ứng thuốc</dt><dd id="kham-di-ung-thuoc">-</dd></div>
             </dl>
           </article>
 
           <div class="two-column-layout exam-layout">
             <article class="card">
-              <h3>Thong tin kham</h3>
+              <h3>Thông tin khám</h3>
               <div id="loi-form-kham" class="form-errors is-hidden" role="alert"></div>
               <div class="form-grid">
                 <label class="field field-span-2">
-                  <span>Ten bac si <strong>*</strong></span>
+                  <span>Tên bác sĩ <strong>*</strong></span>
                   <input id="ten-bac-si" data-testid="input-ten-bac-si" type="text" />
                 </label>
                 <label class="field field-span-2">
-                  <span>Chan doan <strong>*</strong></span>
+                  <span>Chẩn đoán <strong>*</strong></span>
                   <textarea id="chuan-doan" data-testid="input-chuan-doan" rows="4"></textarea>
                 </label>
                 <label class="field field-span-2">
-                  <span>Loi dan</span>
+                  <span>Lời dặn</span>
                   <textarea id="loi-dan" rows="3"></textarea>
                 </label>
               </div>
             </article>
 
             <article class="card card-wide">
-              <h3>Them thuoc vao don</h3>
+              <h3>Thêm thuốc vào đơn</h3>
               <form id="form-thuoc" novalidate>
                 <div id="loi-form-thuoc" class="form-errors is-hidden" role="alert"></div>
                 <div class="form-grid form-grid-3">
                   <label class="field field-span-2">
-                    <span>Ten thuoc <strong>*</strong></span>
+                    <span>Tên thuốc <strong>*</strong></span>
                     <input id="ten-thuoc" data-testid="input-ten-thuoc" type="text" required />
                   </label>
                   <label class="field">
-                    <span>Ham luong</span>
-                    <input id="ham-luong" type="text" placeholder="Vi du: 500 mg" />
+                    <span>Hàm lượng</span>
+                    <input id="ham-luong" type="text" placeholder="Ví dụ: 500 mg" />
                   </label>
                   <label class="field">
-                    <span>Don vi</span>
-                    <input id="don-vi" type="text" placeholder="Vien, goi..." />
+                    <span>Đơn vị</span>
+                    <input id="don-vi" type="text" placeholder="Viên, gói..." />
                   </label>
                   <label class="field">
-                    <span>So luong moi lan <strong>*</strong></span>
+                    <span>Số lượng mỗi lần <strong>*</strong></span>
                     <input id="so-luong-moi-lan" type="number" min="0.1" step="0.1" value="1" required />
                   </label>
                   <label class="field">
-                    <span>So lan moi ngay <strong>*</strong></span>
+                    <span>Số lần mỗi ngày <strong>*</strong></span>
                     <input id="so-lan-moi-ngay" type="number" min="1" step="1" value="1" required />
                   </label>
                   <label class="field">
-                    <span>So ngay dung <strong>*</strong></span>
+                    <span>Số ngày dùng <strong>*</strong></span>
                     <input id="so-ngay-dung" type="number" min="1" step="1" value="1" required />
                   </label>
                   <label class="field">
-                    <span>Tong so luong</span>
+                    <span>Tổng số lượng</span>
                     <input id="tong-so-luong" type="number" readonly value="1" />
                   </label>
                   <label class="field field-span-2">
-                    <span>Cach dung</span>
-                    <input id="cach-dung" type="text" placeholder="Vi du: Uong sau an" />
+                    <span>Cách dùng</span>
+                    <input id="cach-dung" type="text" placeholder="Ví dụ: Uống sau ăn" />
                   </label>
                   <label class="field">
-                    <span>Thoi diem dung</span>
-                    <input id="thoi-diem-dung" type="text" placeholder="Sang, trua, toi" />
+                    <span>Thời điểm dùng</span>
+                    <input id="thoi-diem-dung" type="text" placeholder="Sáng, trưa, tối" />
                   </label>
                 </div>
                 <div class="form-actions">
-                  <button data-testid="button-them-thuoc" class="button button-primary" type="submit">Them thuoc</button>
+                  <button data-testid="button-them-thuoc" class="button button-primary" type="submit">Thêm thuốc</button>
                 </div>
               </form>
             </article>
@@ -233,7 +233,7 @@
           <article class="card prescription-card">
             <div class="card-toolbar">
               <div>
-                <h3>Danh sach thuoc</h3>
+                <h3>Danh sách thuốc</h3>
                 <p id="ma-don-dang-kham" class="muted">-</p>
               </div>
             </div>
@@ -242,23 +242,23 @@
                 <thead>
                   <tr>
                     <th>STT</th>
-                    <th>Ten thuoc</th>
-                    <th>Ham luong</th>
-                    <th>Lieu dung</th>
-                    <th>So ngay</th>
+                    <th>Tên thuốc</th>
+                    <th>Hàm lượng</th>
+                    <th>Liều dùng</th>
+                    <th>Số ngày</th>
                     <th>Tong SL</th>
-                    <th>Cach dung</th>
-                    <th>Thao tac</th>
+                    <th>Cách dùng</th>
+                    <th>Thao tác</th>
                   </tr>
                 </thead>
                 <tbody id="danh-sach-thuoc" data-testid="danh-sach-thuoc"></tbody>
               </table>
             </div>
-            <div id="rong-thuoc" class="empty-state">Chua co thuoc trong don.</div>
+            <div id="rong-thuoc" class="empty-state">Chưa có thuốc trong đơn.</div>
             <div class="form-actions align-end">
-              <button id="button-luu-nhap" class="button button-secondary" type="button">Luu nhap</button>
-              <button id="button-hoan-tat-don" data-testid="button-hoan-tat-don" class="button button-success" type="button">Hoan tat don thuoc</button>
-              <button id="button-huy-kham" class="button button-danger-outline" type="button">Huy thao tac kham</button>
+              <button id="button-luu-nhap" class="button button-secondary" type="button">Lưu nháp</button>
+              <button id="button-hoan-tat-don" data-testid="button-hoan-tat-don" class="button button-success" type="button">Hoàn tất đơn thuốc</button>
+              <button id="button-huy-kham" class="button button-danger-outline" type="button">Hủy thao tác khám</button>
             </div>
           </article>
         </div>
@@ -267,29 +267,29 @@
       <section id="section-lich-su" class="app-section is-hidden" data-section-panel="lich-su">
         <div class="section-heading">
           <div>
-            <p class="eyebrow">BUOC 3</p>
-            <h2>Lich su don thuoc</h2>
+            <p class="eyebrow">BƯỚC 3</p>
+            <h2>Lịch sử đơn thuốc</h2>
           </div>
-          <p>Xem lai, tim kiem, in va huy cac don nhap.</p>
+          <p>Xem lại, tìm kiếm, in và hủy các đơn nháp.</p>
         </div>
         <article class="card">
           <div class="card-toolbar">
             <div>
-              <h3>Danh sach don thuoc</h3>
-              <p id="tong-don-thuoc" class="muted">0 don thuoc</p>
+              <h3>Danh sách đơn thuốc</h3>
+              <p id="tong-don-thuoc" class="muted">0 đơn thuốc</p>
             </div>
             <div class="filters">
               <label class="field compact">
-                <span>Tim kiem</span>
-                <input id="tim-don-thuoc" type="search" placeholder="Ma don, benh nhan, bac si" />
+                <span>Tìm kiếm</span>
+                <input id="tim-don-thuoc" type="search" placeholder="Mã đơn, bệnh nhân, bác sĩ" />
               </label>
               <label class="field compact">
-                <span>Trang thai</span>
+                <span>Trạng thái</span>
                 <select id="loc-trang-thai-don-thuoc">
-                  <option value="">Tat ca</option>
-                  <option value="nhap">Nhap</option>
-                  <option value="da_hoan_tat">Da hoan tat</option>
-                  <option value="da_huy">Da huy</option>
+                  <option value="">Tất cả</option>
+                  <option value="nhap">Nháp</option>
+                  <option value="da_hoan_tat">Đã hoàn tất</option>
+                  <option value="da_huy">Đã hủy</option>
                 </select>
               </label>
             </div>
@@ -298,19 +298,19 @@
             <table>
               <thead>
                 <tr>
-                  <th>Ma don</th>
-                  <th>Benh nhan</th>
-                  <th>Bac si</th>
-                  <th>Ngay ke</th>
-                  <th>So thuoc</th>
-                  <th>Trang thai</th>
-                  <th>Thao tac</th>
+                  <th>Mã đơn</th>
+                  <th>Bệnh nhân</th>
+                  <th>Bác sĩ</th>
+                  <th>Ngày kê</th>
+                  <th>Số thuốc</th>
+                  <th>Trạng thái</th>
+                  <th>Thao tác</th>
                 </tr>
               </thead>
               <tbody id="danh-sach-don-thuoc" data-testid="danh-sach-don-thuoc"></tbody>
             </table>
           </div>
-          <div id="rong-don-thuoc" class="empty-state">Chua co don thuoc nao.</div>
+          <div id="rong-don-thuoc" class="empty-state">Chưa có đơn thuốc nào.</div>
         </article>
       </section>
     </main>
@@ -319,15 +319,15 @@
       <div class="modal-backdrop" data-close-modal></div>
       <article class="modal-content">
         <div class="modal-header no-print">
-          <h2 id="modal-title">Chi tiet don thuoc</h2>
-          <button id="button-dong-modal" class="icon-button" type="button" aria-label="Dong">×</button>
+          <h2 id="modal-title">Chi tiết đơn thuốc</h2>
+          <button id="button-dong-modal" class="icon-button" type="button" aria-label="Đóng">×</button>
         </div>
         <div id="noi-dung-in-don" class="print-area">
           <header class="print-header">
             <div>
-              <p class="eyebrow">PHONG KHAM MINI</p>
-              <h2>DON THUOC</h2>
-              <p>Ung dung minh hoa phuc vu hoc tap</p>
+              <p class="eyebrow">PHÒNG KHÁM MINI</p>
+              <h2>ĐƠN THUỐC</h2>
+              <p>Ứng dụng minh họa phục vụ học tập</p>
             </div>
             <div class="print-code">
               <strong id="chi-tiet-ma-don">-</strong>
@@ -335,29 +335,29 @@
             </div>
           </header>
           <dl class="detail-grid">
-            <div><dt>Benh nhan</dt><dd id="chi-tiet-benh-nhan">-</dd></div>
-            <div><dt>Ngay sinh</dt><dd id="chi-tiet-ngay-sinh">-</dd></div>
-            <div><dt>Bac si</dt><dd id="chi-tiet-bac-si">-</dd></div>
-            <div><dt>Chan doan</dt><dd id="chi-tiet-chuan-doan">-</dd></div>
+            <div><dt>Bệnh nhân</dt><dd id="chi-tiet-benh-nhan">-</dd></div>
+            <div><dt>Ngày sinh</dt><dd id="chi-tiet-ngay-sinh">-</dd></div>
+            <div><dt>Bác sĩ</dt><dd id="chi-tiet-bac-si">-</dd></div>
+            <div><dt>Chẩn đoán</dt><dd id="chi-tiet-chuan-doan">-</dd></div>
           </dl>
           <table class="print-table">
             <thead>
-              <tr><th>STT</th><th>Thuoc</th><th>Lieu dung</th><th>Tong SL</th><th>Cach dung</th></tr>
+              <tr><th>STT</th><th>Thuốc</th><th>Liều dùng</th><th>Tổng SL</th><th>Cách dùng</th></tr>
             </thead>
             <tbody id="chi-tiet-danh-sach-thuoc"></tbody>
           </table>
           <div class="detail-note">
-            <strong>Loi dan:</strong>
+            <strong>Lời dặn:</strong>
             <p id="chi-tiet-loi-dan">-</p>
           </div>
           <div class="signature">
             <div></div>
-            <div><strong>Bac si ke don</strong><span>(Ky va ghi ro ho ten)</span></div>
+            <div><strong>Bác sĩ kê đơn</strong><span>(Ký và ghi rõ họ tên)</span></div>
           </div>
         </div>
         <div class="modal-actions no-print">
-          <button id="button-in-modal" class="button button-primary" type="button">In don thuoc</button>
-          <button id="button-dong-modal-duoi" class="button button-secondary" type="button">Dong</button>
+          <button id="button-in-modal" class="button button-primary" type="button">In đơn thuốc</button>
+          <button id="button-dong-modal-duoi" class="button button-secondary" type="button">Đóng</button>
         </div>
       </article>
     </div>

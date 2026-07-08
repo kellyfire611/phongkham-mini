@@ -1,54 +1,54 @@
-# Phong kham Mini
+# Phòng khám Mini
 
-Ung dung web tinh phuc vu bai thuc hanh **HTML, CSS, JavaScript, LocalStorage, Vitest, Playwright va GitHub Actions**.
+Ứng dụng web tĩnh phục vụ bài thực hành **HTML, CSS, JavaScript, LocalStorage, Vitest, Playwright và GitHub Actions**.
 
-> Day la ung dung hoc tap. Khong su dung cho hoat dong kham chua benh thuc te va khong nhap du lieu suc khoe that.
+> Đây là ứng dụng học tập. Không sử dụng cho hoạt động khám chữa bệnh thực tế và không nhập dữ liệu sức khỏe thật.
 
-## Chuc nang
+## Chức năng
 
-- CRUD tiep nhan benh nhan.
-- Tim kiem va loc theo trang thai.
-- Chuyen benh nhan vao trang thai dang kham.
-- Lap don nhap, them/xoa thuoc, tinh tong so luong.
-- Hoan tat hoac huy don thuoc.
-- Xem lich su, chi tiet va in don thuoc.
-- Luu du lieu bang LocalStorage.
-- Unit Test, Business Test va Playwright UI Test.
-- CI/CD va deploy GitHub Pages.
+- CRUD tiếp nhận bệnh nhân.
+- Tìm kiếm và lọc theo trạng thái.
+- Chuyển bệnh nhân vào trạng thái đang khám.
+- Lập đơn nháp, thêm/xóa thuốc, tính tổng số lượng.
+- Hoàn tất hoặc hủy đơn thuốc.
+- Xem lịch sử, chi tiết và in đơn thuốc.
+- Lưu dữ liệu bằng LocalStorage.
+- Unit Test, Business Test và Playwright UI Test.
+- CI/CD và deploy GitHub Pages.
 
-## Cong nghe
+## Công nghệ
 
 - HTML5, CSS3, JavaScript ES Module.
 - Vite.
-- Vitest va V8 Coverage.
+- Vitest và V8 Coverage.
 - Playwright Chromium.
-- GitHub Actions va GitHub Pages.
+- GitHub Actions và GitHub Pages.
 
-## Cau truc thu muc
+## Cấu trúc thư mục
 
 ```text
-src/js/business       Ham nghiep vu thuan
-src/js/services       Dieu phoi quy tac nghiep vu
-src/js/repositories   Doc/ghi LocalStorage
-src/js/ui             Xu ly DOM
+src/js/business       Hàm nghiệp vụ thuần
+src/js/services       Điều phối quy tắc nghiệp vụ
+src/js/repositories   Đọc/ghi LocalStorage
+src/js/ui             Xử lý DOM
 tests/unit            Unit Test
-tests/business        Business Test dung storage gia
+tests/business        Business Test dùng storage giả
 tests/e2e             Playwright UI Test
 .github/workflows     CI/CD
 ```
 
-## Chay tren may ca nhan
+## Chạy trên máy cá nhân
 
-Yeu cau Node.js 22 tro len.
+Yêu cầu Node.js 22 trở lên.
 
 ```bash
 npm ci
 npm run dev
 ```
 
-Mo dia chi Vite hien thi trong Terminal.
+Mở địa chỉ Vite hiển thị trong Terminal.
 
-## Kiem thu
+## Kiểm thử
 
 ```bash
 npm run test:unit
@@ -59,7 +59,7 @@ npm run test:e2e
 npm run test:e2e:report
 ```
 
-Chay toan bo:
+Chạy toàn bộ:
 
 ```bash
 npm run test:all
@@ -72,26 +72,26 @@ npm run build
 npm run preview
 ```
 
-Thu muc ket qua la `dist/`. Cau hinh `base: './'` giup asset chay dung khi website nam tai duong dan repository GitHub Pages.
+Thư mục kết quả là `dist/`. Cấu hình `base: './'` giúp asset chạy đúng khi website nằm tại đường dẫn repository GitHub Pages.
 
-## Dua len GitHub
+## Đưa lên GitHub
 
 ```bash
 git init
 git add .
-git commit -m "Khoi tao Phong kham Mini"
+git commit -m "Khởi tạo Phòng khám Mini"
 git branch -M main
 git remote add origin https://github.com/TEN-TAI-KHOAN/TEN-REPOSITORY.git
 git push -u origin main
 ```
 
-Sau do:
+Sau đó:
 
-1. Mo repository tren GitHub.
-2. Vao **Settings → Pages**.
-3. Tai **Build and deployment → Source**, chon **GitHub Actions**.
-4. Mo tab **Actions** va cho workflow chay xanh.
-5. URL demo se co dang `https://TEN-TAI-KHOAN.github.io/TEN-REPOSITORY/`.
+1. Mở repository trên GitHub.
+2. Vào **Settings → Pages**.
+3. Tại **Build and deployment → Source**, chọn **GitHub Actions**.
+4. Mở tab **Actions** và chờ workflow chạy xanh.
+5. URL demo sẽ có dạng `https://TEN-TAI-KHOAN.github.io/TEN-REPOSITORY/`.
 
 ## Pipeline
 
@@ -106,26 +106,26 @@ Build Vite
    ↓
 Upload Pages Artifact
    ↓
-Deploy GitHub Pages (chi khi push main)
+Deploy GitHub Pages (chỉ khi push main)
 ```
 
-Pull Request chi chay test va build, khong deploy.
+Pull Request chỉ chạy test và build, không deploy.
 
 ## LocalStorage
 
-Du lieu chi nam trong trinh duyet hien tai. Du lieu khong dong bo qua may khac va se mat neu xoa du lieu trinh duyet. Nut **Xoa toan bo du lieu** chi xoa cac khoa cua ung dung.
+Dữ liệu chỉ nằm trong trình duyệt hiện tại. Dữ liệu không đồng bộ qua máy khác và sẽ mất nếu xóa dữ liệu trình duyệt. Nút **Xóa toàn bộ dữ liệu** chỉ xóa các khóa của ứng dụng.
 
-## Quy tac nghiep vu chinh
+## Quy tắc nghiệp vụ chính
 
-- Khong trung so dien thoai va ngay sinh.
-- Khong xoa benh nhan da co don hoan tat.
-- Don hoan tat phai co bac si, chan doan va it nhat mot thuoc.
-- Tong so luong = so luong moi lan × so lan moi ngay × so ngay dung.
-- Don hoan tat khong the sua hoặc huy.
-- Ung dung khong de xuat thuoc, chan doan hay lieu dung.
+- Không trùng số điện thoại và ngày sinh.
+- Không xóa bệnh nhân đã có đơn hoàn tất.
+- Đơn hoàn tất phải có bác sĩ, chẩn đoán và ít nhất một thuốc.
+- Tổng số lượng = số lượng mỗi lần × số lần mỗi ngày × số ngày dùng.
+- Đơn hoàn tất không thể sửa hoặc hủy.
+- Ứng dụng không đề xuất thuốc, chẩn đoán hay liều dùng.
 
-## Link bai lam
+## Link bài làm
 
-- Repository: `Dien link tai day`
-- GitHub Pages: `Dien link tai day`
-- Anh chup man hinh: `Bo sung tai day`
+- Repository: `Điền link tại đây`
+- GitHub Pages: `Điền link tại đây`
+- Ảnh chụp màn hình: `Bổ sung tại đây`

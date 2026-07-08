@@ -18,7 +18,7 @@ export function taoBenhNhanService({ benhNhanRepository, donThuocRepository, tao
 
   function layChiTietBenhNhan(id) {
     const benhNhan = benhNhanRepository.timBenhNhanTheoId(id);
-    if (!benhNhan) throw new Error('Khong tim thay benh nhan.');
+    if (!benhNhan) throw new Error('Không tìm thấy bệnh nhân.');
     return benhNhan;
   }
 
@@ -27,7 +27,7 @@ export function taoBenhNhanService({ benhNhanRepository, donThuocRepository, tao
     const duLieuChuan = chuanHoaBenhNhan(duLieu);
     const kiemTra = kiemTraBenhNhan(duLieuChuan, thoiGian);
     if (!kiemTra.hopLe) throw new Error(Object.values(kiemTra.loi)[0]);
-    if (timBenhNhanTrung(benhNhanRepository.layTatCaBenhNhan(), duLieuChuan)) throw new Error('Benh nhan da ton tai.');
+    if (timBenhNhanTrung(benhNhanRepository.layTatCaBenhNhan(), duLieuChuan)) throw new Error('Bệnh nhân đã tồn tại.');
     return benhNhanRepository.themBenhNhan(taoBenhNhanMoi(duLieuChuan, {
       id: taoId(),
       maBenhNhan: taoMaBenhNhan(),
@@ -41,13 +41,13 @@ export function taoBenhNhanService({ benhNhanRepository, donThuocRepository, tao
     const duLieuChuan = chuanHoaBenhNhan(duLieu);
     const kiemTra = kiemTraBenhNhan(duLieuChuan, thoiGian);
     if (!kiemTra.hopLe) throw new Error(Object.values(kiemTra.loi)[0]);
-    if (timBenhNhanTrung(benhNhanRepository.layTatCaBenhNhan(), duLieuChuan, id)) throw new Error('Benh nhan da ton tai.');
+    if (timBenhNhanTrung(benhNhanRepository.layTatCaBenhNhan(), duLieuChuan, id)) throw new Error('Bệnh nhân đã tồn tại.');
     return benhNhanRepository.capNhatBenhNhan(id, { ...duLieuChuan, ngayCapNhat: thoiGian });
   }
 
   function xoaBenhNhan(id) {
     layChiTietBenhNhan(id);
-    if (!coTheXoaBenhNhan(id, donThuocRepository.layTatCaDonThuoc())) throw new Error('Khong the xoa benh nhan da co don thuoc hoan tat.');
+    if (!coTheXoaBenhNhan(id, donThuocRepository.layTatCaDonThuoc())) throw new Error('Không thể xóa bệnh nhân đã có đơn thuốc hoàn tất.');
     benhNhanRepository.xoaBenhNhan(id);
     return true;
   }
@@ -59,7 +59,7 @@ export function taoBenhNhanService({ benhNhanRepository, donThuocRepository, tao
   function batDauKham(id) {
     const benhNhan = layChiTietBenhNhan(id);
     if (benhNhan.trangThai === TRANG_THAI_BENH_NHAN.DANG_KHAM) return benhNhan;
-    if (!coTheBatDauKham(benhNhan)) throw new Error('Benh nhan khong con o trang thai cho kham.');
+    if (!coTheBatDauKham(benhNhan)) throw new Error('Bệnh nhân không còn ở trạng thái chờ khám.');
     return benhNhanRepository.thayDoiTrangThaiBenhNhan(id, TRANG_THAI_BENH_NHAN.DANG_KHAM, layThoiGianHienTai());
   }
 
@@ -70,8 +70,8 @@ export function taoBenhNhanService({ benhNhanRepository, donThuocRepository, tao
 
   function taoDuLieuBenhNhanMau() {
     const mau = [
-      { hoTen: 'Nguyen Van An', ngaySinh: '1988-05-12', gioiTinh: 'Nam', soDienThoai: '0901112233', diaChi: 'Ninh Kieu, Can Tho', trieuChung: 'Dau dau, met moi', tienSuBenh: 'Khong', diUngThuoc: 'Chua ghi nhan' },
-      { hoTen: 'Tran Thi Binh', ngaySinh: '1994-10-03', gioiTinh: 'Nu', soDienThoai: '0912223344', diaChi: 'Cai Rang, Can Tho', trieuChung: 'Ho va dau hong', tienSuBenh: 'Viem mui di ung', diUngThuoc: 'Chua ghi nhan' },
+      { hoTen: 'Nguyễn Văn An', ngaySinh: '1988-05-12', gioiTinh: 'Nam', soDienThoai: '0901112233', diaChi: 'Ninh Kiều, Cần Thơ', trieuChung: 'Đau đầu, mệt mỏi', tienSuBenh: 'Không', diUngThuoc: 'Chưa ghi nhận' },
+      { hoTen: 'Trần Thị Bình', ngaySinh: '1994-10-03', gioiTinh: 'Nữ', soDienThoai: '0912223344', diaChi: 'Cái Răng, Cần Thơ', trieuChung: 'Ho và đau họng', tienSuBenh: 'Viêm mũi dị ứng', diUngThuoc: 'Chưa ghi nhận' },
     ];
     return mau.map((item) => themBenhNhan(item));
   }

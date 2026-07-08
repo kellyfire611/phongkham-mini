@@ -8,22 +8,22 @@ import {
   xoaThuocKhoiDanhSach,
 } from '../../src/js/business/don-thuoc-business.js';
 
-describe('Tinh tong so luong thuoc', () => {
-  it('tinh dung tong so luong', () => expect(tinhTongSoLuongThuoc(1.5, 2, 3)).toBe(9));
-  it('tu choi so luong bang 0', () => expect(() => tinhTongSoLuongThuoc(0, 2, 3)).toThrow());
-  it('tu choi so lan am', () => expect(() => tinhTongSoLuongThuoc(1, -1, 3)).toThrow());
-  it('tu choi so ngay bang 0', () => expect(() => tinhTongSoLuongThuoc(1, 2, 0)).toThrow());
+describe('Tính tổng số lượng thuốc', () => {
+  it('tính đúng tổng số lượng', () => expect(tinhTongSoLuongThuoc(1.5, 2, 3)).toBe(9));
+  it('từ chối số lượng bằng 0', () => expect(() => tinhTongSoLuongThuoc(0, 2, 3)).toThrow());
+  it('từ chối số lần âm', () => expect(() => tinhTongSoLuongThuoc(1, -1, 3)).toThrow());
+  it('từ chối số ngày bằng 0', () => expect(() => tinhTongSoLuongThuoc(1, 2, 0)).toThrow());
 });
 
-describe('Quan ly danh sach thuoc', () => {
-  it('khong lam thay doi object dau vao', () => {
-    const dauVao = { tenThuoc: ' Thuoc A ', soLuongMoiLan: 1, soLanMoiNgay: 2, soNgayDung: 3 };
+describe('Quản lý danh sách thuốc', () => {
+  it('không làm thay đổi object đầu vào', () => {
+    const dauVao = { tenThuoc: ' Thuốc A ', soLuongMoiLan: 1, soLanMoiNgay: 2, soNgayDung: 3 };
     const banSao = { ...dauVao };
     taoThuocTrongDon(dauVao, { id: 't1' });
     expect(dauVao).toEqual(banSao);
   });
 
-  it('them va xoa thuoc bang danh sach moi', () => {
+  it('thêm và xóa thuốc bằng danh sách mới', () => {
     const goc = [{ id: 't1' }];
     const daThem = themThuocVaoDanhSach(goc, { id: 't2' });
     expect(daThem).toHaveLength(2);
@@ -32,12 +32,12 @@ describe('Quan ly danh sach thuoc', () => {
   });
 });
 
-describe('Hoan tat don thuoc', () => {
-  it('tu choi don khong co thuoc', () => expect(kiemTraDonThuocCoTheHoanTat({ tenBacSi: 'BS A', chuanDoan: 'Cam', danhSachThuoc: [] }).hopLe).toBe(false));
-  it('tu choi don thieu bac si', () => expect(kiemTraDonThuocCoTheHoanTat({ tenBacSi: '', chuanDoan: 'Cam', danhSachThuoc: [{}] }).hopLe).toBe(false));
-  it('tu choi don thieu chan doan', () => expect(kiemTraDonThuocCoTheHoanTat({ tenBacSi: 'BS A', chuanDoan: '', danhSachThuoc: [{}] }).hopLe).toBe(false));
-  it('chap nhan don hop le', () => expect(kiemTraDonThuocCoTheHoanTat({ tenBacSi: 'BS A', chuanDoan: 'Cam', danhSachThuoc: [{}] }).hopLe).toBe(true));
-  it('don hoan tat va da huy khong the sua', () => {
+describe('Hoàn tất đơn thuốc', () => {
+  it('từ chối đơn không có thuốc', () => expect(kiemTraDonThuocCoTheHoanTat({ tenBacSi: 'BS A', chuanDoan: 'Cam', danhSachThuoc: [] }).hopLe).toBe(false));
+  it('từ chối đơn thiếu bác sĩ', () => expect(kiemTraDonThuocCoTheHoanTat({ tenBacSi: '', chuanDoan: 'Cam', danhSachThuoc: [{}] }).hopLe).toBe(false));
+  it('từ chối đơn thiếu chẩn đoán', () => expect(kiemTraDonThuocCoTheHoanTat({ tenBacSi: 'BS A', chuanDoan: '', danhSachThuoc: [{}] }).hopLe).toBe(false));
+  it('chấp nhận đơn hợp lệ', () => expect(kiemTraDonThuocCoTheHoanTat({ tenBacSi: 'BS A', chuanDoan: 'Cam', danhSachThuoc: [{}] }).hopLe).toBe(true));
+  it('đơn hoàn tất và đã hủy không thể sửa', () => {
     expect(coTheSuaDonThuoc({ trangThai: 'da_hoan_tat' })).toBe(false);
     expect(coTheSuaDonThuoc({ trangThai: 'da_huy' })).toBe(false);
   });

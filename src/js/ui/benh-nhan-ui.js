@@ -24,7 +24,7 @@ export function khoiTaoBenhNhanUI({ benhNhanService, donThuocService, onChonKham
   function lamMoiFormBenhNhan() {
     form.reset();
     document.querySelector('#benh-nhan-id').value = '';
-    document.querySelector('#button-luu-benh-nhan').textContent = 'Luu benh nhan';
+    document.querySelector('#button-luu-benh-nhan').textContent = 'Lưu bệnh nhân';
     xoaLoiForm('#loi-form-benh-nhan');
   }
 
@@ -38,7 +38,7 @@ export function khoiTaoBenhNhanUI({ benhNhanService, donThuocService, onChonKham
     document.querySelector('#trieu-chung').value = benhNhan.trieuChung;
     document.querySelector('#tien-su-benh').value = benhNhan.tienSuBenh;
     document.querySelector('#di-ung-thuoc').value = benhNhan.diUngThuoc;
-    document.querySelector('#button-luu-benh-nhan').textContent = 'Cap nhat benh nhan';
+    document.querySelector('#button-luu-benh-nhan').textContent = 'Cập nhật bệnh nhân';
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
@@ -66,29 +66,29 @@ export function khoiTaoBenhNhanUI({ benhNhanService, donThuocService, onChonKham
       const tr = document.createElement('tr');
       tr.dataset.patientId = benhNhan.id;
       tr.append(
-        taoO(benhNhan.maBenhNhan, 'Ma BN'),
-        taoO(benhNhan.hoTen, 'Ho ten'),
-        taoO(dinhDangNgay(benhNhan.ngaySinh), 'Ngay sinh'),
-        taoO(benhNhan.soDienThoai, 'So dien thoai'),
+        taoO(benhNhan.maBenhNhan, 'Mã BN'),
+        taoO(benhNhan.hoTen, 'Họ tên'),
+        taoO(dinhDangNgay(benhNhan.ngaySinh), 'Ngày sinh'),
+        taoO(benhNhan.soDienThoai, 'Số điện thoại'),
       );
       const tdTrangThai = document.createElement('td');
-      tdTrangThai.dataset.label = 'Trang thai';
+      tdTrangThai.dataset.label = 'Trạng thái';
       const badge = document.createElement('span');
       badge.className = `badge badge-${benhNhan.trangThai}`;
       badge.textContent = NHAN_TRANG_THAI[benhNhan.trangThai];
       tdTrangThai.append(badge);
       const tdAction = document.createElement('td');
-      tdAction.dataset.label = 'Thao tac';
+      tdAction.dataset.label = 'Thao tác';
       const nhom = document.createElement('div');
       nhom.className = 'action-group';
-      nhom.append(taoNut('Sua', 'sua', benhNhan.id));
-      if (benhNhan.trangThai !== 'da_kham') nhom.append(taoNut(benhNhan.trangThai === 'dang_kham' ? 'Tiep tuc kham' : 'Bat dau kham', 'kham', benhNhan.id, 'button-primary'));
-      nhom.append(taoNut('Xoa', 'xoa', benhNhan.id, 'button-danger-outline'));
+      nhom.append(taoNut('Sửa', 'sua', benhNhan.id));
+      if (benhNhan.trangThai !== 'da_kham') nhom.append(taoNut(benhNhan.trangThai === 'dang_kham' ? 'Tiếp tục khám' : 'Bắt đầu khám', 'kham', benhNhan.id, 'button-primary'));
+      nhom.append(taoNut('Xóa', 'xoa', benhNhan.id, 'button-danger-outline'));
       tdAction.append(nhom);
       tr.append(tdTrangThai, tdAction);
       tbody.append(tr);
     });
-    document.querySelector('#tong-benh-nhan').textContent = `${danhSach.length} benh nhan`;
+    document.querySelector('#tong-benh-nhan').textContent = `${danhSach.length} bệnh nhân`;
     document.querySelector('#rong-benh-nhan').classList.toggle('is-hidden', danhSach.length > 0);
   }
 
@@ -99,7 +99,7 @@ export function khoiTaoBenhNhanUI({ benhNhanService, donThuocService, onChonKham
       const id = document.querySelector('#benh-nhan-id').value;
       if (id) benhNhanService.capNhatBenhNhan(id, layDuLieuForm());
       else benhNhanService.themBenhNhan(layDuLieuForm());
-      hienThiThongBaoThanhCong(id ? 'Cap nhat benh nhan thanh cong.' : 'Tiep nhan benh nhan thanh cong.');
+      hienThiThongBaoThanhCong(id ? 'Cập nhật bệnh nhân thành công.' : 'Tiếp nhận bệnh nhân thành công.');
       lamMoiFormBenhNhan();
       hienThiDanhSachBenhNhan();
     } catch (error) {
@@ -112,9 +112,9 @@ export function khoiTaoBenhNhanUI({ benhNhanService, donThuocService, onChonKham
     if (!nut) return;
     try {
       if (nut.dataset.action === 'sua') dienDuLieuBenhNhanVaoForm(benhNhanService.layChiTietBenhNhan(nut.dataset.id));
-      if (nut.dataset.action === 'xoa' && xacNhanThaoTac('Ban co chac muon xoa benh nhan nay?')) {
+      if (nut.dataset.action === 'xoa' && xacNhanThaoTac('Bạn có chắc muốn xóa bệnh nhân này?')) {
         benhNhanService.xoaBenhNhan(nut.dataset.id);
-        hienThiThongBaoThanhCong('Da xoa benh nhan.');
+        hienThiThongBaoThanhCong('Đã xóa bệnh nhân.');
         hienThiDanhSachBenhNhan();
       }
       if (nut.dataset.action === 'kham') {

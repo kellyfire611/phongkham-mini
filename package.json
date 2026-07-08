@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "Ung dung tiep nhan benh nhan va ke don thuoc dung LocalStorage, Vitest, Playwright va GitHub Pages.",
+  "description": "Ứng dụng tiếp nhận bệnh nhân và kê đơn thuốc dùng LocalStorage, Vitest, Playwright và GitHub Pages.",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

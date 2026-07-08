@@ -53,12 +53,12 @@ export function khoiTaoKhamBenhUI({ benhNhanService, donThuocService, khoLuuTru,
       const tr = document.createElement('tr');
       const duLieu = [
         [index + 1, 'STT'],
-        [thuoc.tenThuoc, 'Ten thuoc'],
-        [thuoc.hamLuong || '-', 'Ham luong'],
-        [`${thuoc.soLuongMoiLan} x ${thuoc.soLanMoiNgay} lan/ngay`, 'Lieu dung'],
-        [thuoc.soNgayDung, 'So ngay'],
-        [`${thuoc.tongSoLuong} ${thuoc.donVi || ''}`.trim(), 'Tong SL'],
-        [[thuoc.cachDung, thuoc.thoiDiemDung].filter(Boolean).join(' - ') || '-', 'Cach dung'],
+        [thuoc.tenThuoc, 'Tên thuốc'],
+        [thuoc.hamLuong || '-', 'Hàm lượng'],
+        [`${thuoc.soLuongMoiLan} x ${thuoc.soLanMoiNgay} lần/ngày`, 'Liều dùng'],
+        [thuoc.soNgayDung, 'Số ngày'],
+        [`${thuoc.tongSoLuong} ${thuoc.donVi || ''}`.trim(), 'Tổng SL'],
+        [[thuoc.cachDung, thuoc.thoiDiemDung].filter(Boolean).join(' - ') || '-', 'Cách dùng'],
       ];
       duLieu.forEach(([noiDung, nhan]) => {
         const td = document.createElement('td');
@@ -67,11 +67,11 @@ export function khoiTaoKhamBenhUI({ benhNhanService, donThuocService, khoLuuTru,
         tr.append(td);
       });
       const td = document.createElement('td');
-      td.dataset.label = 'Thao tac';
+      td.dataset.label = 'Thao tác';
       const nut = document.createElement('button');
       nut.type = 'button';
       nut.className = 'button button-small button-danger-outline';
-      nut.textContent = 'Xoa';
+      nut.textContent = 'Xóa';
       nut.dataset.action = 'xoa-thuoc';
       nut.dataset.id = thuoc.id;
       td.append(nut);
@@ -89,7 +89,7 @@ export function khoiTaoKhamBenhUI({ benhNhanService, donThuocService, khoLuuTru,
     }
     try {
       const don = donThuocService.layDonThuocTheoId(donDangMoId);
-      if (don.trangThai !== 'nhap') throw new Error('Don thuoc khong con o trang thai nhap.');
+      if (don.trangThai !== 'nhap') throw new Error('Đơn thuốc không còn ở trạng thái nháp.');
       const benhNhan = benhNhanService.layChiTietBenhNhan(don.benhNhanId);
       document.querySelector('#chua-chon-benh-nhan').classList.add('is-hidden');
       document.querySelector('#noi-dung-kham-benh').classList.remove('is-hidden');
@@ -123,11 +123,11 @@ export function khoiTaoKhamBenhUI({ benhNhanService, donThuocService, khoLuuTru,
     event.preventDefault();
     xoaLoiForm('#loi-form-thuoc');
     try {
-      if (!donDangMoId) throw new Error('Chua chon benh nhan de ke don.');
+      if (!donDangMoId) throw new Error('Chưa chọn bệnh nhân để kê đơn.');
       const don = donThuocService.themThuocVaoDon(donDangMoId, layDuLieuThuoc());
       hienThiDanhSachThuoc(don);
       lamMoiFormThuoc();
-      hienThiThongBaoThanhCong('Da them thuoc vao don.');
+      hienThiThongBaoThanhCong('Đã thêm thuốc vào đơn.');
     } catch (error) {
       hienThiLoiForm('#loi-form-thuoc', [error.message]);
     }
@@ -139,7 +139,7 @@ export function khoiTaoKhamBenhUI({ benhNhanService, donThuocService, khoLuuTru,
     try {
       const don = donThuocService.xoaThuocKhoiDon(donDangMoId, nut.dataset.id);
       hienThiDanhSachThuoc(don);
-      hienThiThongBaoThanhCong('Da xoa thuoc khoi don.');
+      hienThiThongBaoThanhCong('Đã xóa thuốc khỏi đơn.');
     } catch (error) { hienThiThongBaoLoi(error.message); }
   }
 
@@ -147,7 +147,7 @@ export function khoiTaoKhamBenhUI({ benhNhanService, donThuocService, khoLuuTru,
     xoaLoiForm('#loi-form-kham');
     try {
       donThuocService.luuNhapDonThuoc(donDangMoId, layThongTinKham());
-      hienThiThongBaoThanhCong('Da luu don thuoc nhap.');
+      hienThiThongBaoThanhCong('Đã lưu đơn thuốc nháp.');
     } catch (error) { hienThiLoiForm('#loi-form-kham', [error.message]); }
   }
 
@@ -158,19 +158,19 @@ export function khoiTaoKhamBenhUI({ benhNhanService, donThuocService, khoLuuTru,
       donDangMoId = '';
       khoLuuTru.xoaTheoKhoa(KHOA_LUU_TRU.DON_DANG_MO);
       hienThiDonDangMo();
-      hienThiThongBaoThanhCong('Hoan tat don thuoc thanh cong.');
+      hienThiThongBaoThanhCong('Hoàn tất đơn thuốc thành công.');
       onHoanTat();
     } catch (error) { hienThiLoiForm('#loi-form-kham', [error.message]); }
   }
 
   function xuLyHuyKham() {
-    if (!donDangMoId || !xacNhanThaoTac('Ban co chac muon huy don thuoc dang nhap?')) return;
+    if (!donDangMoId || !xacNhanThaoTac('Bạn có chắc muốn hủy đơn thuốc đang nháp?')) return;
     try {
       donThuocService.huyDonThuoc(donDangMoId);
       donDangMoId = '';
       khoLuuTru.xoaTheoKhoa(KHOA_LUU_TRU.DON_DANG_MO);
       hienThiDonDangMo();
-      hienThiThongBaoThanhCong('Da huy don nhap va dua benh nhan ve cho kham.');
+      hienThiThongBaoThanhCong('Đã hủy đơn nháp và đưa bệnh nhân về chờ khám.');
       onHuy();
     } catch (error) { hienThiThongBaoLoi(error.message); }
   }

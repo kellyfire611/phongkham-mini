@@ -1,9 +1,9 @@
 import { TRANG_THAI_DON_THUOC } from '../constants/hang-so.js';
-import { chuanHoaChuoi, kiemTraThuocTrongDon, kiemTraThongTinKham } from '../utils/kiem-tra.js';
+import { chuanHoaChuoi, chuanHoaTuKhoaTimKiem, kiemTraThuocTrongDon, kiemTraThongTinKham } from '../utils/kiem-tra.js';
 
 export function tinhTongSoLuongThuoc(soLuongMoiLan, soLanMoiNgay, soNgayDung) {
   const cacSo = [soLuongMoiLan, soLanMoiNgay, soNgayDung].map(Number);
-  if (cacSo.some((so) => !Number.isFinite(so) || so <= 0)) throw new Error('Lieu dung phai la cac so lon hon 0.');
+  if (cacSo.some((so) => !Number.isFinite(so) || so <= 0)) throw new Error('Liều dùng phải là các số lớn hơn 0.');
   return Number((cacSo[0] * cacSo[1] * cacSo[2]).toFixed(2));
 }
 
@@ -50,7 +50,7 @@ export function xoaThuocKhoiDanhSach(danhSach, thuocId) {
 export function kiemTraDonThuocCoTheHoanTat(donThuoc) {
   const thongTin = kiemTraThongTinKham(donThuoc);
   const loi = { ...thongTin.loi };
-  if (!Array.isArray(donThuoc?.danhSachThuoc) || donThuoc.danhSachThuoc.length === 0) loi.danhSachThuoc = 'Don thuoc phai co it nhat mot loai thuoc.';
+  if (!Array.isArray(donThuoc?.danhSachThuoc) || donThuoc.danhSachThuoc.length === 0) loi.danhSachThuoc = 'Đơn thuốc phải có ít nhất một loại thuốc.';
   return { hopLe: Object.keys(loi).length === 0, loi };
 }
 
@@ -63,11 +63,11 @@ export function coTheHuyDonThuoc(donThuoc) {
 }
 
 export function timKiemDonThuoc(danhSach, tuKhoa = '', trangThai = '') {
-  const khoa = chuanHoaChuoi(tuKhoa).toLocaleLowerCase('vi');
+  const khoa = chuanHoaTuKhoaTimKiem(tuKhoa);
   return danhSach.filter((item) => {
     const dungTrangThai = !trangThai || item.trangThai === trangThai;
     const dungTuKhoa = !khoa || [item.maDonThuoc, item.tenBenhNhan, item.tenBacSi]
-      .some((giaTri) => String(giaTri ?? '').toLocaleLowerCase('vi').includes(khoa));
+      .some((giaTri) => chuanHoaTuKhoaTimKiem(giaTri).includes(khoa));
     return dungTrangThai && dungTuKhoa;
   });
 }

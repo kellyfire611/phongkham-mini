@@ -84,20 +84,20 @@ document.querySelector('#button-du-lieu-mau').addEventListener('click', () => {
   try {
     benhNhanService.taoDuLieuBenhNhanMau();
     benhNhanUI.hienThiDanhSachBenhNhan();
-    hienThiThongBaoThanhCong('Da tao du lieu benh nhan mau.');
+    hienThiThongBaoThanhCong('Đã tạo dữ liệu bệnh nhân mẫu.');
   } catch (error) { hienThiThongBaoLoi(error.message); }
 });
 
 document.querySelector('#button-xoa-du-lieu').addEventListener('click', () => {
-  if (!xacNhanThaoTac('Xoa toan bo benh nhan va don thuoc trong trinh duyet?')) return;
+  if (!xacNhanThaoTac('Xóa toàn bộ bệnh nhân và đơn thuốc trong trình duyệt?')) return;
   khoLuuTru.xoaToanBo();
   benhNhanUI.lamMoiFormBenhNhan();
   benhNhanUI.hienThiDanhSachBenhNhan();
   khamBenhUI.hienThiDonDangMo();
   donThuocUI.hienThiDanhSachDonThuoc();
   moKhuVuc('tiep-nhan');
-  hienThiThongBaoThanhCong('Da xoa toan bo du lieu ung dung.');
+  hienThiThongBaoThanhCong('Đã xóa toàn bộ dữ liệu ứng dụng.');
 });
 
-window.addEventListener('error', (event) => hienThiThongBaoLoi(event.error?.message ?? 'Ung dung gap loi khong xac dinh.'));
+window.addEventListener('error', (event) => hienThiThongBaoLoi(event.error?.message ?? 'Ứng dụng gặp lỗi không xác định.'));
 moKhuVuc('tiep-nhan');
